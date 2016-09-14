@@ -29,7 +29,7 @@ public class TestController {
 		model.addAttribute("xujj", "maven springMVC ,hello world 你好！！！！");
 		System.out.println("helloworld");
 		logger.info("你好");
-		logger.warn("警告。。。");
+		logger.warn("警告。。。12322000");
 		return "test";
 	}
 }
