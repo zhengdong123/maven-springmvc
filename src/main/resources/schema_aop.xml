@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xsi:schemaLocation="     
+          http://www.springframework.org/schema/beans     
+          http://www.springframework.org/schema/beans/spring-beans-3.0.xsd     
+          http://www.springframework.org/schema/context     
+          http://www.springframework.org/schema/context/spring-context-3.0.xsd 
+          http://www.springframework.org/schema/aop     
+          http://www.springframework.org/schema/aop/spring-aop-3.0.xsd"
+    default-autowire="byName">
+
+    <!-- ==============================利用spring自己的aop配置================================ -->
+    <!-- 声明一个业务类 -->
+    <bean id="baseBusiness" class="com.zd.aop.A04_aop_interface.BaseBusiness" />
+    
+    <!-- 声明通知类 -->
+    <bean id="baseBefore" class="com.zd.aop.A04_aop_interface.advice.BaseBeforeAdvice" />
+    <bean id="baseAfterReturn" class="com.zd.aop.A04_aop_interface.advice.BaseAfterReturnAdvice" />
+    <bean id="baseAfterThrows" class="com.zd.aop.A04_aop_interface.advice.BaseAfterThrowsAdvice" />
+    <bean id="baseAround" class="com.zd.aop.A04_aop_interface.advice.BaseAroundAdvice" />
+
+    <!-- 指定切点匹配类 -->
+    <bean id="pointcut" class="com.zd.aop.A04_aop_interface.pointcut.Pointcut" />
+
+    <!-- 包装通知，指定切点 -->
+    <bean id="matchBeforeAdvisor" class="org.springframework.aop.support.DefaultPointcutAdvisor">
+        <property name="pointcut">
+            <ref bean="pointcut" />
+        </property>
+        <property name="advice">
+            <ref bean="baseBefore" />
+        </property>
+    </bean>
+
+    <!-- 使用ProxyFactoryBean 产生代理对象 -->
+    <bean id="businessProxy" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <!-- 代理对象所实现的接口 ，如果有接口可以这样设置 -->
+        <property name="proxyInterfaces">
+            <value>com.zd.aop.A04_aop_interface.IBaseBusiness</value>
+        </property>
+
+        <!-- 设置目标对象 -->
+        <property name="target">
+            <ref local="baseBusiness" />
+        </property>
+        <!-- 代理对象所使用的拦截器 -->
+        <property name="interceptorNames">
+            <list>
+                <value>matchBeforeAdvisor</value>
+                <value>baseAfterReturn</value>
+                <value>baseAround</value>
+            </list>
+        </property>
+    </bean>
+</beans>
