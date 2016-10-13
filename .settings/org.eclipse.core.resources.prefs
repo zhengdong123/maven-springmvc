@@ -1,2 +1,4 @@
 eclipse.preferences.version=1
 encoding//src/main/resources/log4j.properties=UTF-8
+encoding//src/main/webapp/WEB-INF/jsp/user/acc_login_userinfo.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/jsp/user/login.jsp=UTF-8
