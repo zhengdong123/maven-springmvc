@@ -18,6 +18,12 @@
 			<version>4.12</version>
 			<scope>test</scope>
 		</dependency>
+		<!-- 定时器所需jar包 -->
+		<dependency>
+		    <groupId>org.quartz-scheduler</groupId>
+		    <artifactId>quartz</artifactId>
+		    <version>1.8.6</version>
+		</dependency>
 
 		<!-- spring需要的jar包 -->
 		<dependency>
@@ -25,6 +31,17 @@
 			<artifactId>spring-context</artifactId>
 			<version>3.2.4.RELEASE</version>
 			<type>jar</type>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>3.1.1.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>3.1.1.RELEASE</version>
 		</dependency>
 
 		<dependency>
@@ -110,11 +127,16 @@
 			<version>1.2.17</version>
 		</dependency>
 
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
 			<version>1.4.2</version>
-		</dependency>
+		</dependency> -->
+		 <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.7.9</version>
+        </dependency>
 
 		<!-- 文件上传需要的jar包 -->
 		<dependency>

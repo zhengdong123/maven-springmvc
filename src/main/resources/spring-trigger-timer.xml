@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">  
+<beans>
+<!--1、 注入配置日终 -->
+<bean id="job1" class="com.zd.quartztimer.trigger.Job1" />
+
+<!--2、包装业务类为定时器类 -->
+<bean id="task" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+    <!-- 调用的类--> 
+    <property name="targetObject"> 
+        <ref bean="job1"/> 
+    </property>  
+    <!-- 调用类中的方法 --> 
+    <property name="targetMethod"> 
+        <value>execute</value> 
+    </property> 
+</bean>
+
+<!-- 3、定义触发时间 -->
+<bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+    <property name="jobDetail">
+        <ref bean="task"/>
+    </property> 
+    <!-- cron定时表达式 -->
+    <property name="cronExpression">
+        <value>0/15 * * * * ?</value>
+    </property>
+</bean>
+
+<!-- 4、注入factory设置调度 -->
+ <!-- 总管理类 如果将lazy-init='false'那么容器启动就会执行调度程序  -->  
+<bean id="scheduler"   class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+    <property name="triggers">
+            <list>
+                <ref bean="cronTrigger" />
+            </list>
+        </property>
+</bean>
+ </beans>

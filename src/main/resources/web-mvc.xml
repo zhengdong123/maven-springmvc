@@ -64,5 +64,7 @@
         <property name="suffix" value=".jsp" />
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
     </bean>
-
+    <!-- 自定义设置计时器调度 -->
+	<bean id="scheduler_timer" class="com.zd.quartztimer.trigger.common.MySchedulerFactoryBean"/>
+	<import resource="spring-trigger-timer.xml"/>
 </beans>
