@@ -7,6 +7,7 @@
  */
 package com.zd.service;
 
+
 /**
  * <p>
  * 日志记录
@@ -14,6 +15,7 @@ package com.zd.service;
  * @author zhengdong 2016年10月11日 下午4:57:37
  * @version V1.0
  */
+
 public interface LogService {
 	
 }

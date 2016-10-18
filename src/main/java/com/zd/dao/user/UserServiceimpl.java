@@ -11,6 +11,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.zd.service.user.UserService;
 
@@ -21,14 +23,12 @@ import com.zd.service.user.UserService;
  * @author zhengdong 2016年10月11日 下午4:59:57
  * @version V1.0
  */
+@Transactional
+@Service("userService")
 public class UserServiceimpl implements UserService {
 	
 	private static final Logger logger = Logger.getLogger(UserServiceimpl.class);
 	
-	/*
-	 * (non-Javadoc)
-	 * @see com.zd.service.user.UserService#getUserMap()
-	 */
 	public Map<String, String> getUserMap() {
 		logger.warn("准备从数据库获取用户信息了...");
 		Map<String, String> userMap = new HashMap<String, String>();

@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,6 +22,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
 import com.zd.anno.SystemControllerLog;
+import com.zd.common.SpringBeanFactoryUtils;
+import com.zd.service.user.UserService;
 
 /**
  * <p>
@@ -34,6 +37,8 @@ import com.zd.anno.SystemControllerLog;
 public class UserController {
 	
 	Logger logger = Logger.getLogger(UserController.class);
+	@Autowired
+	UserService userService;
 	
 	/**
 	 * 跳转到用户登录页面
@@ -45,6 +50,13 @@ public class UserController {
 	@RequestMapping("/go_userlogin.do")
 	@SystemControllerLog(description = "跳转到登录页面...")
 	public String goUserLogin(HttpServletRequest request, HttpServletResponse response) {
+		Map<String, String> userMap = userService.getUserMap();
+		logger.info("方式一@Autowired：userMap:" + userMap);
+		
+		UserService userService2 = (UserService)SpringBeanFactoryUtils.getBean(UserService.class);
+		Map<String, String> userMap2 = userService2.getUserMap();
+		logger.info("方式二获取的用户userMap2：" + userMap2);
+		
 		logger.info("跳转到登录页面");
 		return "user/login";
 	}
